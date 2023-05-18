@@ -10,7 +10,7 @@ const CartIconWrapper = styled.div`
   position: absolute;
   top: 0;
   right: 10px;
-  margin-top: 25px;
+  margin-top: 108px;
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -25,7 +25,7 @@ const ItemCount = styled.span`
   color: #fff;
   padding: 2px 4px;
   border-radius: 144%;
-  margin-top: 54px;
+  margin-top: -5px;
 `;
 
 const CartIcon = () => {

@@ -35,8 +35,8 @@ const CartPage = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    padding: 2rem;
+    min-height: 64vh;
+    padding: 4rem;
     box-sizing: border-box;
     justify-content: space-between; // Added this line
   `;
