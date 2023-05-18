@@ -9,10 +9,10 @@ const StyledNavbar = styled.nav`
   padding: 1rem;
 
   /* add padding for screen width >= 992px */
-  @media screen and (min-width: 992px) {
+  /* @media screen and (min-width: 992px) {
     padding-right: 1rem !important;
     padding-left: 1rem !important;
-  }
+  } */
 
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 `;
@@ -70,17 +70,17 @@ const NavActions = styled.div`
 `;
 
 const NavButton = styled(NavLink)`
-  background-color: #ff4d4d;
+  /* background-color: #ff4d4d;
   color: #fff;
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  margin-left: 1rem;
+  margin-left: 1rem; */
 
-  &:nth-last-of-type(2) {
+  /* &:nth-last-of-type(2) {
     background-color: #0077be;
     font-weight: bold;
-  }
+  } */
 `;
 
 const CartIcon = styled.i`
