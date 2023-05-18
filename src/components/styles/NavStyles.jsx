@@ -70,17 +70,17 @@ const NavActions = styled.div`
 `;
 
 const NavButton = styled(NavLink)`
-  /* background-color: #ff4d4d;
+  background-color: #ff4d4d;
   color: #fff;
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  margin-left: 1rem; */
+  margin-left: 1rem;
 
-  /* &:nth-last-of-type(2) {
+  &:nth-last-of-type(2) {
     background-color: #0077be;
     font-weight: bold;
-  } */
+  }
 `;
 
 const CartIcon = styled.i`
