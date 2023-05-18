@@ -127,7 +127,7 @@ const CloseIcon = styled.div`
   cursor: pointer;
 `;
 
-const Nav = () => {
+const Nav = ({ isOpen }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
 
@@ -161,16 +161,17 @@ const Nav = () => {
       {!isMobileView && (
         <NavLinksList>
           <NavLinkItem>
-            <NavLinkStyled exact to='/'>
+            <NavLinkStyled exact='true' to='/'>
               Home
             </NavLinkStyled>
           </NavLinkItem>
-          <NavLinkItem>
-            <NavLinkStyled to='/contact'>Contact</NavLinkStyled>
-          </NavLinkItem>
-          <NavLinkItem>
-            <NavLinkStyled to='/CartPage'>Cart Page</NavLinkStyled>
-          </NavLinkItem>
+          <NavLinkStyled exact='true' to='/contact'>
+            Contact
+          </NavLinkStyled>
+
+          <NavLinkStyled exact='true' to='/cart'>
+            Cart Page
+          </NavLinkStyled>
         </NavLinksList>
       )}
 
