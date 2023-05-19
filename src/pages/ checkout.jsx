@@ -10,15 +10,15 @@ const CheckoutPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const history = useHistory();
 
-  const handleNameChange = e => {
+  const handleNameChange = (e) => {
     setName(e.target.value);
   };
 
-  const handleAddressChange = e => {
+  const handleAddressChange = (e) => {
     setAddress(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // Perform any necessary validation
 
@@ -115,20 +115,20 @@ const CheckoutPage = () => {
           <h2>Checkout Page</h2>
           <CheckoutForm onSubmit={handleSubmit}>
             <CheckoutInput
-              type='text'
-              placeholder='Enter your name'
+              type="text"
+              placeholder="Enter your name"
               value={name}
               onChange={handleNameChange}
               required
             />
             <CheckoutInput
-              type='text'
-              placeholder='Enter your address'
+              type="text"
+              placeholder="Enter your address"
               value={address}
               onChange={handleAddressChange}
               required
             />
-            <CheckoutButton type='submit'>Submit Order</CheckoutButton>
+            <CheckoutButton type="submit">Submit Order</CheckoutButton>
           </CheckoutForm>
           <p>Total Price: ${totalPrice.toFixed(2)}</p>
           <p>Items in Cart: {cart.length}</p>
@@ -139,124 +139,3 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
-// import React, { useContext } from 'react';
-// import { Link } from 'react-router-dom';
-// import { CartContext } from '../contexts/CartContext';
-// import styled from 'styled-components';
-
-// const CheckoutContainer = styled.div`
-//   max-width: 800px;
-//   margin: 0 auto;
-//   padding: 20px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-
-//   @media screen and (min-width: 768px) {
-//     flex-direction: row;
-//     justify-content: space-between;
-//     align-items: flex-start;
-//   }
-// `;
-
-// const CheckoutText = styled.p`
-//   font-size: 1.2rem;
-//   margin-bottom: 20px;
-
-//   @media screen and (min-width: 768px) {
-//     margin-bottom: 0;
-//   }
-// `;
-
-// const CheckoutButton = styled.button`
-//   padding: 10px 20px;
-//   background-color: #333;
-//   color: #fff;
-//   border: none;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   font-size: 1.2rem;
-
-//   &:hover {
-//     background-color: #000;
-//   }
-// `;
-
-// const EmptyCartText = styled.p`
-//   font-size: 1.2rem;
-//   margin-top: 20px;
-// `;
-
-// const GoBackLink = styled(Link)`
-//   margin-top: 20px;
-//   font-size: 1.2rem;
-//   color: #333;
-//   text-decoration: underline;
-
-//   &:hover {
-//     color: #000;
-//   }
-// `;
-
-// const CheckoutPage = () => {
-//   const { cartItems, clearCart } = useContext(CartContext);
-
-//   const handleCheckout = () => {
-//     // check if there are any items in the cart
-//     if (cartItems.length === 0) {
-//       alert('Your cart is empty.');
-//       return;
-//     }
-
-//     // calculate the total price of the items in the cart
-//     const totalPrice = cartItems.reduce(
-//       (acc, item) => acc + item.quantity * item.price,
-//       0
-//     );
-
-//     // perform payment processing here, e.g. using a payment processing API
-//     // eslint-disable-next-line no-undef
-//     const paymentResult = processPayment(totalPrice);
-
-//     // check if the payment was successful
-//     if (!paymentResult.success) {
-//       alert('Payment failed. Please try again.');
-//       return;
-//     }
-
-//     // perform order finalization logic here, e.g. communicating with a server
-//     // eslint-disable-next-line no-undef
-//     const orderResult = finalizeOrder(cartItems);
-
-//     // check if the order was successfully finalized
-//     if (!orderResult.success) {
-//       alert('Order failed. Please try again.');
-//       return;
-//     }
-
-//     // clear the cart
-//     clearCart();
-
-//     // display a success message
-//     alert('Order successful! Thank you for your purchase.');
-//   };
-
-//   return (
-//     <CheckoutContainer>
-//       <CheckoutText>
-//         {cartItems.length > 0
-//           ? `You have ${cartItems.length} items in your cart.`
-//           : `Your cart is empty.`}
-//       </CheckoutText>
-//       {cartItems.length > 0 && (
-//         <CheckoutButton onClick={handleCheckout}>Checkout</CheckoutButton>
-//       )}
-//       {cartItems.length === 0 && (
-//         <EmptyCartText>Your cart is empty.</EmptyCartText>
-//       )}
-//       <GoBackLink to='/'>Go back to store</GoBackLink>
-//     </CheckoutContainer>
-//   );
-// };
-
-// export default CheckoutPage;
