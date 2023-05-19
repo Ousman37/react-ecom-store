@@ -8,20 +8,19 @@ const CartPage = () => {
 
   useEffect(() => {
     calculateTotalPrice();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 
   // Calculate the total price
   const calculateTotalPrice = () => {
     let total = 0;
-    cart.forEach(item => {
+    cart.forEach((item) => {
       total += item.price * item.quantity;
     });
     return total;
   };
 
   // Handle removing an item from the cart
-  const handleRemoveFromCart = itemId => {
+  const handleRemoveFromCart = (itemId) => {
     removeFromCart(itemId);
   };
 
@@ -152,7 +151,7 @@ const CartPage = () => {
         <>
           {/* Render the list of cart items */}
           <CartList>
-            {cart.map(item => (
+            {cart.map((item) => (
               <CartItem key={item.id}>
                 <CartItemDetails>
                   <CartItemImage src={item.imageUrl} alt={item.name} />
@@ -166,15 +165,16 @@ const CartPage = () => {
                   <div>
                     Quantity:
                     <QuantityInput
-                      type='number'
+                      type="number"
                       value={item.quantity}
                       min={1}
-                      onChange={e =>
+                      onChange={(e) =>
                         updateQuantity(item.id, parseInt(e.target.value))
                       }
                     />
                     <AddButton
-                      onClick={() => handleAddQuantity(item.id, item.quantity)}>
+                      onClick={() => handleAddQuantity(item.id, item.quantity)}
+                    >
                       Add
                     </AddButton>
                   </div>
@@ -190,12 +190,12 @@ const CartPage = () => {
           <CartTotal>Total Price: ${totalPrice.toFixed(2)}</CartTotal>
 
           {/* Button to continue shopping */}
-          <ContinueShoppingButton to='/'>
+          <ContinueShoppingButton to="/">
             Continue Shopping
           </ContinueShoppingButton>
 
           {/* Button to proceed to checkout */}
-          <CheckoutButton to='/checkout'>Proceed to Checkout</CheckoutButton>
+          <CheckoutButton to="/checkout">Proceed to Checkout</CheckoutButton>
         </>
       ) : (
         <EmptyCart>Your cart is empty</EmptyCart>

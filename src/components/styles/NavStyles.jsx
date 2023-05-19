@@ -100,7 +100,7 @@ const MobileMenuIcon = styled.div`
 `;
 
 const MobileMenu = styled.div`
-  display: ${props => (props.isOpen ? 'flex' : 'none')};
+  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   flex-direction: column;
   background-color: #fff;
   position: absolute;

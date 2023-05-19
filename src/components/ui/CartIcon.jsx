@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { FiShoppingCart } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { CartContext } from '../contexts/CartContext';
+import { CartContext } from '../../contexts/CartContext';
 
 const CartIconWrapper = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ const CartIcon = () => {
 
   return (
     <CartIconWrapper>
-      <Link to='/cart'>
+      <Link to="/cart">
         {/* Assuming the route for the cart page is '/cart' */}
         {totalItems > 0 && <ItemCount>{totalItems}</ItemCount>}
         <FiShoppingCart size={34} />

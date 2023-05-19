@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const CardContainer = styled.div`
@@ -61,6 +62,16 @@ const ProductCard = ({ product }) => {
       </ViewProductLink>
     </CardContainer>
   );
+};
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    imageUrl: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired, // Update the id prop type to string
+  }).isRequired,
 };
 
 export default ProductCard;

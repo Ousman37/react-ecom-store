@@ -1,7 +1,7 @@
 import React from 'react';
-import CartIcon from './CartIcon';
+import CartIcon from './ui/CartIcon';
 import ProductList from './ProductList';
-import CheckoutButton from './CheckoutButton';
+import CheckoutButton from './ui/CheckoutButton';
 
 const ParentComponent = () => {
   const cartItems = [
