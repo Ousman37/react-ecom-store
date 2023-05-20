@@ -37,7 +37,7 @@ const CartPage = () => {
     min-height: 64vh;
     padding: 4rem;
     box-sizing: border-box;
-    justify-content: space-between; // Added this line
+    justify-content: space-between;
   `;
 
   const CartList = styled.ul`
@@ -84,6 +84,10 @@ const CartPage = () => {
     width: 40px;
     padding: 0.25rem;
     text-align: center;
+
+    @media (max-width: 768px) {
+      width: 30px;
+    }
   `;
 
   const AddButton = styled.button`
@@ -93,6 +97,10 @@ const CartPage = () => {
     padding: 0.25rem 0.5rem;
     margin-left: 1rem;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      padding: 0.25rem;
+    }
   `;
 
   const CartTotal = styled.p`
@@ -118,7 +126,12 @@ const CartPage = () => {
     &:hover {
       background-color: #cc0000;
     }
+
+    @media (max-width: 768px) {
+      padding: 0.25rem;
+    }
   `;
+
   const ContinueShoppingButton = styled(Link)`
     background-color: #0088cc;
     color: #ffffff;
@@ -149,7 +162,6 @@ const CartPage = () => {
 
       {cart.length > 0 ? (
         <>
-          {/* Render the list of cart items */}
           <CartList>
             {cart.map((item) => (
               <CartItem key={item.id}>
@@ -186,15 +198,12 @@ const CartPage = () => {
             ))}
           </CartList>
 
-          {/* Display the total price */}
           <CartTotal>Total Price: ${totalPrice.toFixed(2)}</CartTotal>
 
-          {/* Button to continue shopping */}
           <ContinueShoppingButton to="/">
             Continue Shopping
           </ContinueShoppingButton>
 
-          {/* Button to proceed to checkout */}
           <CheckoutButton to="/checkout">Proceed to Checkout</CheckoutButton>
         </>
       ) : (
