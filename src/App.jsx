@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import CartProvider from './contexts/CartContext';
 import HomePage from './pages/home';
 import Product from './data/product';
-import Cart from './pages/cart.jsx';
+import Cart from './pages/CartPage.jsx';
 import Checkout from './pages/CheckoutSuccess';
 import Contact from './pages/contact';
 import Layout from './components/ui/Layout';

@@ -207,7 +207,7 @@ const Nav = () => {
               </NavLinkStyled>
             </li>
             <li>
-              <NavLinkStyled to="/cart" onClick={handleMobileMenuClose}>
+              <NavLinkStyled to="/CartPage" onClick={handleMobileMenuClose}>
                 Cart Page
               </NavLinkStyled>
             </li>
