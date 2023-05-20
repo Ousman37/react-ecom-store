@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../layout/ProductCard';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);

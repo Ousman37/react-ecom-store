@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import CartProvider from './contexts/CartContext';
 import HomePage from './pages/home';
-import Product from './pages/product';
+import Product from './data/product';
 import Cart from './pages/cart.jsx';
 import Checkout from './pages/CheckoutSuccess';
 import Contact from './pages/contact';
