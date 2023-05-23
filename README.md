@@ -8,6 +8,8 @@
 
 Welcome to the React eCom Store project! This engaging assignment demonstrates the power of React by building a fully functional e-commerce store with multiple pages.
 
+![React eCom Store](https://example.com/image.png)
+
 ## Project Overview
 
 The React eCom Store showcases various essential features of an online store, including a homepage with product listings, individual product pages, a cart page, and a checkout success page. The project utilizes the power of React and other dependencies to create a seamless user experience.
@@ -84,3 +86,5 @@ Please note that this project is for educational purposes and may require furthe
 If you have any questions or need further assistance, please don't hesitate to reach out.
 
 Happy coding and enjoy exploring the React eCom Store project!
+
+Visit the [React eCom Store](https://chic-rugelach-72313f.netlify.app/) live site for a demo.

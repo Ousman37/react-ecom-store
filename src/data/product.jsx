@@ -6,21 +6,35 @@ import styled from 'styled-components';
 
 const ProductContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding: 20px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+  }
 `;
 
 const ProductContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 20px;
+  margin-top: 20px;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+    margin-left: 20px;
+  }
 `;
 
 const ProductImage = styled.img`
-  width: 400px;
+  width: 100%;
   height: auto;
+
+  @media (min-width: 768px) {
+    width: 400px;
+  }
 `;
 
 const ProductHeading = styled.h2`
@@ -68,9 +82,9 @@ const ProductPage = () => {
 
   useEffect(() => {
     fetch(`https://api.noroff.dev/api/v1/online-shop/${id}`)
-      .then(response => response.json())
-      .then(data => setProduct(data))
-      .catch(error => console.log(error));
+      .then((response) => response.json())
+      .then((data) => setProduct(data))
+      .catch((error) => console.log(error));
   }, [id]);
 
   if (!product) {
@@ -97,7 +111,7 @@ const ProductPage = () => {
     return 0;
   };
 
-  const renderStarRatings = rating => {
+  const renderStarRatings = (rating) => {
     const starCount = 5;
     const fullStar = Math.floor(rating);
     const halfStar = rating - fullStar >= 0.5 ? 1 : 0;
@@ -108,7 +122,7 @@ const ProductPage = () => {
       stars.push(<StarIcon key={`full-${i}`} />);
     }
     if (halfStar) {
-      stars.push(<StarIcon key='half' half />);
+      stars.push(<StarIcon key="half" half />);
     }
     for (let i = 0; i < emptyStar; i++) {
       stars.push(<StarIcon key={`empty-${i}`} empty />);
@@ -125,10 +139,10 @@ const ProductPage = () => {
         <ProductDescription>{product.description}</ProductDescription>
 
         {product.reviews && product.reviews.length > 0 && (
-          <div className='reviews'>
+          <div className="reviews">
             <h3>Reviews</h3>
             <ul>
-              {product.reviews.map(review => (
+              {product.reviews.map((review) => (
                 <li key={review.id}>
                   {review.comment}
                   <div>{renderStarRatings(review.rating)}</div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { NavLink } from 'react-router-dom';
 import { RiMenuLine, RiCloseLine } from 'react-icons/ri';
 import styled from 'styled-components';
@@ -60,23 +59,6 @@ const NavLinkStyled = styled(NavLink)`
 const NavActions = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const NavButton = styled(NavLink)`
-  background-color: #ff4d4d;
-  color: #fff;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  margin-left: 1rem;
-
-  &:nth-last-of-type(2) {
-    background-color: #0077be;
-    font-weight: bold;
-  }
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const CartIcon = styled.i`
@@ -148,7 +130,7 @@ const Nav = () => {
   const handleMobileMenuClick = () => {
     setIsMobileMenuOpen((prevState) => !prevState);
   };
-  // eslint-disable-next-line no-unused-vars
+
   const handleMobileMenuClose = () => {
     setIsMobileMenuOpen(false);
   };
@@ -181,8 +163,8 @@ const Nav = () => {
 
       <NavActions>
         <CartIcon className="fas fa-shopping-cart" />
-        <NavButton to="/login">Login</NavButton>
-        <NavButton to="/register">Register</NavButton>
+        <NavLinkStyled to="/login">Login</NavLinkStyled>
+        <NavLinkStyled to="/register">Register</NavLinkStyled>
         {isMobileView && (
           <MobileMenuIcon onClick={handleMobileMenuClick}>
             {isMobileMenuOpen ? <RiCloseLine /> : <RiMenuLine />}
@@ -197,7 +179,7 @@ const Nav = () => {
           </CloseIcon>
           <MobileMenuLinks>
             <li>
-              <NavLinkStyled to="/" onClick={handleMobileMenuClose}>
+              <NavLinkStyled exact to="/" onClick={handleMobileMenuClose}>
                 Home
               </NavLinkStyled>
             </li>
@@ -207,7 +189,7 @@ const Nav = () => {
               </NavLinkStyled>
             </li>
             <li>
-              <NavLinkStyled to="/cart" onClick={handleMobileMenuClose}>
+              <NavLinkStyled to="/CartPage" onClick={handleMobileMenuClose}>
                 Cart Page
               </NavLinkStyled>
             </li>
@@ -231,7 +213,7 @@ const Nav = () => {
 export default Nav;
 
 // import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+
 // import { NavLink } from 'react-router-dom';
 // import { RiMenuLine, RiCloseLine } from 'react-icons/ri';
 // import styled from 'styled-components';
@@ -327,7 +309,7 @@ export default Nav;
 // `;
 
 // const MobileMenu = styled.div`
-//   display: ${(props) => (props.isOpen ? 'flex' : 'none')};
+//   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
 //   flex-direction: column;
 //   background-color: #fff;
 //   position: absolute;
@@ -360,8 +342,7 @@ export default Nav;
 //   cursor: pointer;
 // `;
 
-// // eslint-disable-next-line no-unused-vars
-// const Nav = ({ isOpen }) => {
+// const Nav = () => {
 //   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 //   const [isMobileView, setIsMobileView] = useState(false);
 
@@ -381,7 +362,7 @@ export default Nav;
 //   const handleMobileMenuClick = () => {
 //     setIsMobileMenuOpen((prevState) => !prevState);
 //   };
-
+//   // eslint-disable-next-line no-unused-vars
 //   const handleMobileMenuClose = () => {
 //     setIsMobileMenuOpen(false);
 //   };
@@ -395,17 +376,20 @@ export default Nav;
 //       {!isMobileView && (
 //         <NavLinksList>
 //           <NavLinkItem>
-//             <NavLinkStyled exact="true" to="/">
+//             <NavLinkStyled exact to="/">
 //               Home
 //             </NavLinkStyled>
 //           </NavLinkItem>
-//           <NavLinkStyled exact="true" to="/contact">
-//             Contact
-//           </NavLinkStyled>
-
-//           <NavLinkStyled exact="true" to="/cart">
-//             Cart Page
-//           </NavLinkStyled>
+//           <NavLinkItem>
+//             <NavLinkStyled exact to="/contact">
+//               Contact
+//             </NavLinkStyled>
+//           </NavLinkItem>
+//           <NavLinkItem>
+//             <NavLinkStyled exact to="/cart">
+//               Cart Page
+//             </NavLinkStyled>
+//           </NavLinkItem>
 //         </NavLinksList>
 //       )}
 
@@ -437,7 +421,7 @@ export default Nav;
 //               </NavLinkStyled>
 //             </li>
 //             <li>
-//               <NavLinkStyled to="/cart" onClick={handleMobileMenuClose}>
+//               <NavLinkStyled to="/CartPage" onClick={handleMobileMenuClose}>
 //                 Cart Page
 //               </NavLinkStyled>
 //             </li>
@@ -456,10 +440,6 @@ export default Nav;
 //       )}
 //     </StyledNavbar>
 //   );
-// };
-
-// Nav.propTypes = {
-//   isOpen: PropTypes.bool.isRequired,
 // };
 
 // export default Nav;
