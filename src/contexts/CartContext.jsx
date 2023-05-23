@@ -10,7 +10,13 @@ const CartProvider = ({ children }) => {
   });
 
   const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+    const existingItem = cart.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      updateQuantity(existingItem.id, existingItem.quantity + 1);
+    } else {
+      setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+    }
   };
 
   const removeFromCart = (itemId) => {
