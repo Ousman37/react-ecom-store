@@ -8,6 +8,8 @@ import Checkout from './pages/CheckoutSuccess';
 import Contact from './pages/contact';
 import Layout from './components/ui/Layout';
 import CartIcon from './components/ui/CartIcon';
+import Login from './pages/login';
+import Register from './pages/register';
 import NotFoundPage from './pages/NotFoundPage'; // Import the NotFoundPage component
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFoundPage />} /> {/* Catch-all route */}
         </Routes>
       </Layout>
