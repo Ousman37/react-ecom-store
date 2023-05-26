@@ -4,6 +4,10 @@ import { CartContext } from '../contexts/CartContext';
 import styled from 'styled-components';
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Set the minimum height of the container to fill the viewport */
+  justify-content: space-between; /* Distribute remaining space between header and footer */
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
