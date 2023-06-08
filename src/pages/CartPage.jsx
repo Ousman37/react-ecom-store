@@ -114,15 +114,21 @@ const EmptyCart = styled.p`
   margin-top: 2rem;
 `;
 
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
 const ContinueShoppingButton = styled(Link)`
   background-color: #007bff;
   color: #fff;
   border: none;
   padding: 0.75rem 1rem;
-  margin: 0 0.5rem;
+  margin-right: 0.5rem;
   text-decoration: none;
   text-align: center;
-  margin-bottom: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
@@ -136,7 +142,7 @@ const CheckoutButton = styled(Link)`
   color: #ffffff;
   border: none;
   padding: 0.75rem 1rem;
-  margin: 0 0.5rem;
+  margin-left: 0.5rem;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
@@ -200,7 +206,7 @@ const CartPage = () => {
       {cartItems.length > 0 && (
         <>
           <CartTotal>Total: ${calculateTotalPrice().toFixed(2)}</CartTotal>
-          <div>
+          <ButtonGroup>
             <ContinueShoppingButton to="/">
               Continue Shopping
             </ContinueShoppingButton>
@@ -210,7 +216,7 @@ const CartPage = () => {
             >
               Proceed to Checkout
             </CheckoutButton>
-          </div>
+          </ButtonGroup>
         </>
       )}
     </CartPageContainer>
@@ -219,10 +225,10 @@ const CartPage = () => {
 
 export default CartPage;
 
-// import React, { useEffect, useContext } from 'react';
+// import React from 'react';
 // import styled from 'styled-components';
 // import { Link, useNavigate } from 'react-router-dom';
-// import { CartContext } from '../contexts/CartContext';
+// import useCart from '../hooks/useCart';
 
 // const CartPageContainer = styled.div`
 //   display: flex;
@@ -232,6 +238,10 @@ export default CartPage;
 //   padding: 4rem;
 //   box-sizing: border-box;
 //   justify-content: space-between;
+
+//   @media (max-width: 768px) {
+//     padding: 2rem;
+//   }
 // `;
 
 // const CartList = styled.ul`
@@ -246,13 +256,20 @@ export default CartPage;
 //   justify-content: space-between;
 //   align-items: center;
 //   margin-bottom: 1rem;
-
 //   border: 1px solid #ccc;
+//   padding: 1rem;
+//   text-align: center;
+
+//   @media (min-width: 768px) {
+//     flex-direction: row;
+//     text-align: left;
+//   }
 // `;
 
 // const CartItemImage = styled.img`
-//   width: 50px;
-//   height: 50px;
+//   width: 80px;
+//   height: 80px;
+//   object-fit: contain;
 //   margin-right: 1rem;
 // `;
 
@@ -278,14 +295,50 @@ export default CartPage;
 //   }
 // `;
 
-// const QuantityInput = styled.input`
-//   width: 40px;
-//   padding: 0.25rem;
-//   text-align: center;
+// const QuantityButton = styled.button`
+//   background-color: #007bff;
+//   color: #fff;
+//   padding: 0.5rem;
+//   border: none;
+//   cursor: pointer;
+//   transition: background-color 0.3s ease;
+
+//   &:hover {
+//     background-color: #0056b3;
+//   }
 
 //   @media (max-width: 768px) {
-//     width: 30px;
+//     padding: 0.25rem;
 //   }
+// `;
+
+// const RemoveButton = styled.button`
+//   background-color: #dc3545;
+//   color: #fff;
+//   padding: 0.5rem;
+//   border: none;
+//   cursor: pointer;
+//   transition: background-color 0.3s ease;
+
+//   &:hover {
+//     background-color: #b02a37;
+//   }
+
+//   @media (max-width: 768px) {
+//     padding: 0.25rem;
+//   }
+// `;
+
+// const CartTotal = styled.p`
+//   font-weight: bold;
+//   margin-top: 1rem;
+// `;
+
+// const EmptyCart = styled.p`
+//   font-style: italic;
+//   color: #888;
+//   text-align: center;
+//   margin-top: 2rem;
 // `;
 
 // const ContinueShoppingButton = styled(Link)`
@@ -321,117 +374,71 @@ export default CartPage;
 //   }
 // `;
 
-// const CartTotal = styled.p`
-//   font-weight: bold;
-//   margin-top: 1rem;
-// `;
-
-// const EmptyCart = styled.p`
-//   font-style: italic;
-//   color: #888;
-//   text-align: center;
-//   margin-top: 2rem;
-// `;
-
-// const RemoveButton = styled.button`
-//   background-color: #ff0000;
-//   color: #fff;
-//   padding: 0.5rem;
-//   border: none;
-//   cursor: pointer;
-//   transition: background-color 0.3s ease;
-
-//   &:hover {
-//     background-color: #cc0000;
-//   }
-
-//   @media (max-width: 768px) {
-//     padding: 0.25rem;
-//   }
-// `;
-
 // const CartPage = () => {
-//   const { cart, removeFromCart, updateQuantity } = useContext(CartContext);
+//   const { cartItems, handleRemoveFromCart, handleUpdateQuantity } = useCart();
 //   const navigate = useNavigate();
 
-//   useEffect(() => {
-//     calculateTotalPrice();
-//   }, [cart]);
-
-//   // Calculate the total price
 //   const calculateTotalPrice = () => {
-//     let total = 0;
-//     cart.forEach((item) => {
-//       total += item.price * item.quantity;
+//     let totalPrice = 0;
+//     cartItems.forEach((item) => {
+//       totalPrice += item.price * item.quantity;
 //     });
-//     return total;
-//   };
-
-//   // Handle removing an item from the cart
-//   const handleRemoveFromCart = (itemId) => {
-//     removeFromCart(itemId);
-//   };
-
-//   // Handle increasing the quantity of an item
-//   const handleAddQuantity = (itemId, quantity) => {
-//     updateQuantity(itemId, quantity + 1);
+//     return totalPrice;
 //   };
 
 //   return (
 //     <CartPageContainer>
-//       <h2>Cart Page</h2>
-
-//       {cart.length > 0 ? (
+//       <CartList>
+//         {cartItems.length === 0 ? (
+//           <EmptyCart>Your cart is empty.</EmptyCart>
+//         ) : (
+//           cartItems.map((item) => (
+//             <CartItem key={item.id}>
+//               <CartItemDetails>
+//                 <CartItemImage src={item.imageUrl} alt={item.name} />
+//                 <div>
+//                   <CartItemName>{item.name}</CartItemName>
+//                   <CartItemPrice>${item.price.toFixed(2)}</CartItemPrice>
+//                 </div>
+//               </CartItemDetails>
+//               <CartItemActions>
+//                 <QuantityButton
+//                   onClick={() =>
+//                     handleUpdateQuantity(item.id, item.quantity + 1)
+//                   }
+//                 >
+//                   +
+//                 </QuantityButton>
+//                 <QuantityButton
+//                   onClick={() =>
+//                     handleUpdateQuantity(item.id, item.quantity - 1)
+//                   }
+//                 >
+//                   -
+//                 </QuantityButton>
+//                 <RemoveButton onClick={() => handleRemoveFromCart(item.id)}>
+//                   Remove
+//                 </RemoveButton>
+//               </CartItemActions>
+//             </CartItem>
+//           ))
+//         )}
+//       </CartList>
+//       {cartItems.length > 0 && (
 //         <>
-//           <CartList>
-//             {cart.map((item) => (
-//               <CartItem key={item.id}>
-//                 <CartItemDetails>
-//                   <CartItemImage src={item.imageUrl} alt={item.name} />
-//                   <div>
-//                     <CartItemName>{item.name}</CartItemName>
-//                     <CartItemPrice>${item.price.toFixed(2)}</CartItemPrice>
-//                   </div>
-//                 </CartItemDetails>
-
-//                 <CartItemActions>
-//                   <QuantityInput
-//                     type="number"
-//                     value={item.quantity}
-//                     onChange={(e) =>
-//                       updateQuantity(item.id, parseInt(e.target.value))
-//                     }
-//                   />
-//                   <button
-//                     onClick={() => handleAddQuantity(item.id, item.quantity)}
-//                   >
-//                     +
-//                   </button>
-//                   <RemoveButton onClick={() => handleRemoveFromCart(item.id)}>
-//                     Remove
-//                   </RemoveButton>
-//                 </CartItemActions>
-//               </CartItem>
-//             ))}
-//           </CartList>
-
-//           <CartTotal>
-//             Total Price: ${calculateTotalPrice().toFixed(2)}
-//           </CartTotal>
-
-//           <ContinueShoppingButton to="/">
-//             Continue Shopping
-//           </ContinueShoppingButton>
-
-//           <CheckoutButton
-//             to="/checkout/payment-details"
-//             onClick={() => navigate('/checkout/payment-details')}
-//           >
-//             Proceed to Checkout
-//           </CheckoutButton>
+//           <CartTotal>Total: ${calculateTotalPrice().toFixed(2)}</CartTotal>
+//           <div>
+//             <ContinueShoppingButton to="/">
+//               Continue Shopping
+//             </ContinueShoppingButton>
+//             <CheckoutButton
+//               to="/checkout/payment-details"
+//               onClick={() => navigate('/checkout/payment-details')}
+//             >
+//               Proceed to Checkout
+//             </CheckoutButton>
+//           </div>
 //         </>
-//       ) : (
-//         <EmptyCart>Your cart is empty</EmptyCart>
 //       )}
 //     </CartPageContainer>
 //   );
