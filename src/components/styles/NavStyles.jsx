@@ -8,12 +8,6 @@ const StyledNavbar = styled.nav`
   color: #000;
   padding: 1rem;
 
-  /* add padding for screen width >= 992px */
-  /* @media screen and (min-width: 992px) {
-    padding-right: 1rem !important;
-    padding-left: 1rem !important;
-  } */
-
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 `;
 
