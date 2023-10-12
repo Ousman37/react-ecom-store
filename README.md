@@ -1,6 +1,6 @@
 # React eCom Store
 
-![React eCom Store Screenshot](https://github.com/Ousman37/personal-portfolio/blob/main/Screenshot.png?raw=true)
+![React eCom Store Screenshot](https://github.com/Ousman37/react-ecom-store/blob/main/Screenshot_2023-10-12_at_09_upscaled.png?raw=true) 
 
 
 
