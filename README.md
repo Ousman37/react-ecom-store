@@ -1,5 +1,9 @@
 # React eCom Store
 
+![React eCom Store Screenshot](https://github.com/Ousman37/personal-portfolio/blob/main/Screenshot.png?raw=true)
+
+
+
 [![React](https://img.shields.io/badge/React-18.2.0-blue)](https://reactjs.org/)
 [![React Router](https://img.shields.io/badge/React_Router-6.11.2-orange)](https://reactrouter.com/)
 [![styled-components](https://img.shields.io/badge/styled--components-6.0.0--rc.1-yellow)](https://styled-components.com/)
