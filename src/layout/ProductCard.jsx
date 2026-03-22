@@ -52,7 +52,7 @@ const ViewProductLink = styled(Link)`
 const ProductCard = ({ product }) => {
   return (
     <CardContainer>
-      <Image src={product.imageUrl} alt={product.title} />
+      <Image src={product.image?.url} alt={product.image?.alt || product.title} />
       <Title>{product.title}</Title>
       <Description>{product.description}</Description>
 
@@ -66,11 +66,14 @@ const ProductCard = ({ product }) => {
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
-    imageUrl: PropTypes.string.isRequired,
+    image: PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+    }).isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    id: PropTypes.string.isRequired, // Update the id prop type to string
+    id: PropTypes.string.isRequired,
   }).isRequired,
 };
 
