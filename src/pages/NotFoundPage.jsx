@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 const NotFoundContainer = styled.div`
@@ -15,6 +16,21 @@ const NotFoundText = styled.h1`
   margin-bottom: 1rem;
 `;
 
+const SubText = styled.p`
+  color: #888;
+  margin-bottom: 1rem;
+`;
+
+const HomeLink = styled(Link)`
+  color: #007bff;
+  text-decoration: underline;
+  margin-bottom: 1.5rem;
+
+  &:hover {
+    color: #0056b3;
+  }
+`;
+
 const ProgressBar = styled.div`
   width: 200px;
   height: 8px;
@@ -24,28 +40,35 @@ const ProgressBar = styled.div`
 `;
 
 const fillAnimation = keyframes`
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
+  0% { width: 0; }
+  100% { width: 100%; }
 `;
 
 const ProgressBarFill = styled.div`
   width: 0;
   height: 100%;
   background-color: #0077be;
-  animation: ${fillAnimation} 2s linear forwards;
+  animation: ${fillAnimation} 3s linear forwards;
 `;
 
-const NotFoundPage = () => (
-  <NotFoundContainer>
-    <NotFoundText>404 - Page Not Found</NotFoundText>
-    <ProgressBar>
-      <ProgressBarFill />
-    </ProgressBar>
-  </NotFoundContainer>
-);
+const NotFoundPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => navigate('/'), 3000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
+  return (
+    <NotFoundContainer>
+      <NotFoundText>404 - Page Not Found</NotFoundText>
+      <SubText>Redirecting to home in 3 seconds...</SubText>
+      <HomeLink to="/">Go back to home</HomeLink>
+      <ProgressBar>
+        <ProgressBarFill />
+      </ProgressBar>
+    </NotFoundContainer>
+  );
+};
 
 export default NotFoundPage;
