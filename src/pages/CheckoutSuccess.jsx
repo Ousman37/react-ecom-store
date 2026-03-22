@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
 import styled from 'styled-components';
@@ -6,8 +6,8 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Set the minimum height of the container to fill the viewport */
-  justify-content: space-between; /* Distribute remaining space between header and footer */
+  min-height: 100vh;
+  justify-content: space-between;
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -37,6 +37,11 @@ const Button = styled.button`
   &:hover {
     background-color: #45a049;
   }
+
+  &:disabled {
+    background-color: #a5d6a7;
+    cursor: not-allowed;
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -50,34 +55,24 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const InlineMessage = styled.p`
+  font-size: 14px;
+  color: ${({ error }) => (error ? '#dc3545' : '#4caf50')};
+  margin-top: 0.5rem;
+`;
+
 const CheckoutSuccess = () => {
-  const { cart, clearCart } = useContext(CartContext);
+  const { clearCart } = useContext(CartContext);
+  const [confirmed, setConfirmed] = useState(false);
+  const [orderError, setOrderError] = useState(null);
 
-  const handleConfirmOrder = async () => {
+  const handleConfirmOrder = () => {
     try {
-      // Send cart data to server to create an order
-      const response = await fetch('/api/orders', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(cart),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to create order');
-      }
-
-      // Display a success message to the user
-      alert('Order placed successfully!');
-
-      // Clear the cart
       clearCart();
+      setConfirmed(true);
+      setOrderError(null);
     } catch (error) {
-      console.error(error);
-
-      // Display an error message to the user
-      alert('Failed to place order. Please try again.');
+      setOrderError('Something went wrong. Please try again.');
     }
   };
 
@@ -87,7 +82,14 @@ const CheckoutSuccess = () => {
       <Message>
         Your order has been successfully processed. Thank you for your purchase!
       </Message>
-      <Button onClick={handleConfirmOrder}>Confirm Order</Button>
+      {!confirmed ? (
+        <>
+          <Button onClick={handleConfirmOrder}>Confirm Order</Button>
+          {orderError && <InlineMessage error>{orderError}</InlineMessage>}
+        </>
+      ) : (
+        <InlineMessage>Order confirmed! Your cart has been cleared.</InlineMessage>
+      )}
       <StyledLink to="/">Go back to store</StyledLink>
     </Container>
   );
