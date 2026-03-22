@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 
 const CartPageContainer = styled.div`
@@ -155,15 +155,9 @@ const CheckoutButton = styled(Link)`
 
 const CartPage = () => {
   const { cartItems, handleRemoveFromCart, handleUpdateQuantity } = useCart();
-  const navigate = useNavigate();
 
-  const calculateTotalPrice = () => {
-    let totalPrice = 0;
-    cartItems.forEach((item) => {
-      totalPrice += item.price * item.quantity;
-    });
-    return totalPrice;
-  };
+  const calculateTotalPrice = () =>
+    cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <CartPageContainer>
@@ -174,9 +168,9 @@ const CartPage = () => {
           cartItems.map((item) => (
             <CartItem key={item.id}>
               <CartItemDetails>
-                <CartItemImage src={item.imageUrl} alt={item.name} />
+                <CartItemImage src={item.image?.url} alt={item.image?.alt || item.title} />
                 <div>
-                  <CartItemName>{item.name}</CartItemName>
+                  <CartItemName>{item.title}</CartItemName>
                   <CartItemPrice>${item.price.toFixed(2)}</CartItemPrice>
                 </div>
               </CartItemDetails>
@@ -210,10 +204,7 @@ const CartPage = () => {
             <ContinueShoppingButton to="/">
               Continue Shopping
             </ContinueShoppingButton>
-            <CheckoutButton
-              to="/checkout/payment-details"
-              onClick={() => navigate('/checkout/payment-details')}
-            >
+            <CheckoutButton to="/checkout/payment-details">
               Proceed to Checkout
             </CheckoutButton>
           </ButtonGroup>
