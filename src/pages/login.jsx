@@ -32,10 +32,6 @@ const LoginRegisterPage = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      // Form is valid, perform login or register logic based on the mode
-      console.log('Login:', email, password);
-
-      // Clear input fields
       setEmail('');
       setPassword('');
     }
