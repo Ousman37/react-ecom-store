@@ -47,6 +47,19 @@ const Button = styled.button`
 
 const PaymentDetailsPage = () => {
   const navigate = useNavigate();
+  const [form, setForm] = React.useState({
+    nameOnCard: '',
+    cardNumber: '',
+    expiryDate: '',
+    cvv: '',
+    address: '',
+    city: '',
+    postalCode: '',
+  });
+
+  const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -63,6 +76,8 @@ const PaymentDetailsPage = () => {
             type="text"
             id="nameOnCard"
             placeholder="Enter the name on your card"
+            value={form.nameOnCard}
+            onChange={handleChange}
             required
           />
         </div>
@@ -71,17 +86,36 @@ const PaymentDetailsPage = () => {
           <Input
             type="text"
             id="cardNumber"
-            placeholder="Enter your card number"
+            placeholder="1234 5678 9012 3456"
+            value={form.cardNumber}
+            onChange={handleChange}
+            maxLength={19}
             required
           />
         </div>
         <div>
           <Label htmlFor="expiryDate">Expiry Date:</Label>
-          <Input type="text" id="expiryDate" placeholder="MM/YY" required />
+          <Input
+            type="text"
+            id="expiryDate"
+            placeholder="MM/YY"
+            value={form.expiryDate}
+            onChange={handleChange}
+            maxLength={5}
+            required
+          />
         </div>
         <div>
           <Label htmlFor="cvv">CVV:</Label>
-          <Input type="text" id="cvv" placeholder="Enter CVV" required />
+          <Input
+            type="password"
+            id="cvv"
+            placeholder="CVV"
+            value={form.cvv}
+            onChange={handleChange}
+            maxLength={4}
+            required
+          />
         </div>
         <div>
           <Label htmlFor="address">Address:</Label>
@@ -89,12 +123,21 @@ const PaymentDetailsPage = () => {
             type="text"
             id="address"
             placeholder="Enter your address"
+            value={form.address}
+            onChange={handleChange}
             required
           />
         </div>
         <div>
           <Label htmlFor="city">City:</Label>
-          <Input type="text" id="city" placeholder="Enter your city" required />
+          <Input
+            type="text"
+            id="city"
+            placeholder="Enter your city"
+            value={form.city}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
           <Label htmlFor="postalCode">Postal Code:</Label>
@@ -102,6 +145,8 @@ const PaymentDetailsPage = () => {
             type="text"
             id="postalCode"
             placeholder="Enter your postal code"
+            value={form.postalCode}
+            onChange={handleChange}
             required
           />
         </div>
