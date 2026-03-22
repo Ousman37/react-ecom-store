@@ -81,9 +81,9 @@ const ProductPage = () => {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch(`https://api.noroff.dev/api/v1/online-shop/${id}`)
+    fetch(`https://v2.api.noroff.dev/online-shop/${id}`)
       .then((response) => response.json())
-      .then((data) => setProduct(data))
+      .then(({ data }) => setProduct(data))
       .catch((error) => console.log(error));
   }, [id]);
 
@@ -133,7 +133,7 @@ const ProductPage = () => {
 
   return (
     <ProductContainer>
-      <ProductImage src={product.imageUrl} alt={product.title} />
+      <ProductImage src={product.image?.url} alt={product.image?.alt || product.title} />
       <ProductContent>
         <ProductHeading>{product.title}</ProductHeading>
         <ProductDescription>{product.description}</ProductDescription>
