@@ -5,26 +5,28 @@ import ProductCard from '../layout/ProductCard';
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('https://api.noroff.dev/api/v1/online-shop')
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data);
-        setFilteredProducts(data);
+    fetch('https://v2.api.noroff.dev/online-shop')
+      .then((response) => {
+        if (!response.ok) throw new Error('Failed to load products');
+        return response.json();
       })
-      .catch((error) => console.log(error));
+      .then(({ data }) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
 
-  const handleSearchInputChange = (event) => {
-    const input = event.target.value;
-    setSearchInput(input);
-    const filtered = products.filter((product) =>
-      product.title.toLowerCase().includes(input.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-  };
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
   return (
     <Wrapper>
@@ -32,8 +34,10 @@ const HomePage = () => {
         type="text"
         placeholder="Search for a product..."
         value={searchInput}
-        onChange={handleSearchInputChange}
+        onChange={(e) => setSearchInput(e.target.value)}
       />
+      {loading && <StatusMessage>Loading products...</StatusMessage>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <ProductCardWrapper>
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
@@ -74,14 +78,24 @@ const ProductCardWrapper = styled.div`
   gap: 1rem;
 
   @media screen and (max-width: 768px) {
-    /* Styles for screen size up to 768px */
     grid-template-columns: repeat(2, 1fr);
   }
 
   @media screen and (max-width: 480px) {
-    /* Styles for screen size up to 480px */
     grid-template-columns: repeat(1, 1fr);
   }
+`;
+
+const StatusMessage = styled.p`
+  text-align: center;
+  color: #888;
+  margin: 2rem 0;
+`;
+
+const ErrorMessage = styled.p`
+  text-align: center;
+  color: #dc3545;
+  margin: 2rem 0;
 `;
 
 export default HomePage;
