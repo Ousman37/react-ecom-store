@@ -41,10 +41,6 @@ const RegisterPage = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      // Form is valid, perform registration logic
-      console.log('Register:', email, password);
-
-      // Clear input fields
       setEmail('');
       setPassword('');
       setConfirmPassword('');
